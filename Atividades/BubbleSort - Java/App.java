@@ -36,9 +36,15 @@ public class App {
         
         System.out.println("Vetor original: ");
         printArray(vetor);
-        
+        /* 
         System.out.println("");
         BubbleSort.bSortComentado(vetor);
+        System.out.println("Vetor ordenado: ");
+        printArray(vetor);
+        */
+
+        System.out.println("");
+        BubbleSort.bSortDesc(vetor);
         System.out.println("Vetor ordenado: ");
         printArray(vetor);
     }
