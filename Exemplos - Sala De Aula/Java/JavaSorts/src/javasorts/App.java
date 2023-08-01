@@ -22,7 +22,7 @@ public class App {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Random rand = new Random();
+        //Random rand = new Random();
         int tam;
         
         System.out.println("Tamanho do vetor: ");
