@@ -33,21 +33,25 @@ void bSort(int v[], int tam) {
 }
 
 int main() {
-    int vet[10];
-    
+    int tam;
 
-    for(int i = 0; i < 10; i++) {
-        vet[i] = rand()%20;
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &tam);
+
+    int vet[tam];
+
+    for(int i = 0; i < tam; i++) {
+        vet[i] = rand()%50;
     }
 
     printf("Array original:\n");
-    mostraVetor(vet, 10);
+    mostraVetor(vet, tam);
     printf("\n");
 
-    bSort(vet, 10);
+    bSort(vet, tam);
 
     printf("Array ordenado:\n");
-    mostraVetor(vet, 10);
+    mostraVetor(vet, tam);
     getchar();
 
     return 0;
