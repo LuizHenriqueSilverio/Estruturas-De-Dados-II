@@ -61,8 +61,8 @@ public class JavaSorts {
         // BubbleSort.bSortComentado(array);
         // BubbleSort.bSortDesc(array);
         //SelectionSort.sSort(array);
-        
-        SelectionSort.sSortComentado(array);
+        //SelectionSort.sSortComentado(array);
+        InsertionSort.iSort(array);
         
         System.out.println("Vetor ordenado: ");
         printArray(array);
