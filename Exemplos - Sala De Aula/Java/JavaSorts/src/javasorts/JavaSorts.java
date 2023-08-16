@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author luizh
  */
-public class Main {
+public class JavaSorts {
     
     public static int menuEntrada() {
         int op;

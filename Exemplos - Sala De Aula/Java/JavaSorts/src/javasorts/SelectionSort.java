@@ -42,9 +42,13 @@ public class SelectionSort {
             int k = indexMinArray(array, i);
             System.out.println("Atual: " + array[i] + ", trocando com menor valor: " + array[k]);
             scanner.nextLine();
+            
             int temp = array[i];
             array[i] = array[k];
             array[k] = temp;
+            
+            JavaSorts.printArray(array);
+            scanner.nextLine();
         }
     }
 }
