@@ -12,7 +12,16 @@ import java.util.Scanner;
  *
  * @author luizh
  */
-public class App {
+public class Main {
+    
+    public static int menuEntrada() {
+        int op;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1 - Gerar Dados");
+        System.out.println("2 - Entrar com Dados");
+        op = scanner.nextInt();
+        return op;
+    }
     
     public static void printArray(int array[]) {
         for(int i = 0; i < array.length; i++){
@@ -29,9 +38,17 @@ public class App {
         tam = scanner.nextInt();
         int[] vetor = new int[tam];
         
-        System.out.println("Dados vetor: ");
-        for(int i = 0; i < vetor.length; i++) {
-            vetor[i] = scanner.nextInt();
+        int op = menuEntrada();
+        
+        switch(op){
+            case 1:
+                System.out.println("Dados vetor: ");
+                for(int i = 0; i < vetor.length; i++) {
+                    vetor[i] = scanner.nextInt();
+                }
+                break;
+            
+                
         }
         
         System.out.println("Vetor original: ");
@@ -44,10 +61,12 @@ public class App {
         printArray(vetor);
         */
 
+        /*
         System.out.println("");
         BubbleSort.bSortDesc(vetor);
         System.out.println("Vetor ordenado: ");
         printArray(vetor);
+        */
     }
     
 }

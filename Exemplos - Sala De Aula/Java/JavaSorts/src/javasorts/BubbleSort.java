@@ -41,7 +41,7 @@ public class BubbleSort {
 
         for(int fase = 1; fase < n; fase++) {
             System.out.println("Fase: " + fase);
-            App.printArray(array);
+            Main.printArray(array);
             scanner.nextLine();
             boolean trocaFase = false;
 
@@ -69,7 +69,7 @@ public class BubbleSort {
 
         for(int fase = 1; fase < n; fase++) {
             System.out.println("Fase: " + fase);
-            App.printArray(array);
+            Main.printArray(array);
             scanner.nextLine();
             boolean trocaFase = false;
 
