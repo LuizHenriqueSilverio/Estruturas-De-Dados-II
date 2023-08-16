@@ -31,42 +31,44 @@ public class Main {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //Random rand = new Random();
+        Random rand = new Random();
         int tam;
         
         System.out.println("Tamanho do vetor: ");
         tam = scanner.nextInt();
-        int[] vetor = new int[tam];
+        int[] array = new int[tam];
         
         int op = menuEntrada();
         
         switch(op){
             case 1:
-                
+                for(int i = 0; i < array.length; i++) {
+                    array[i] = rand.nextInt(100);
+                }
                 break;
             case 2:
                 System.out.println("Dados vetor: ");
-                for(int i = 0; i < vetor.length; i++) {
-                    vetor[i] = scanner.nextInt();
+                for(int i = 0; i < array.length; i++) {
+                    array[i] = scanner.nextInt();
                 }
                 break;
         }
         
         System.out.println("Vetor original: ");
-        printArray(vetor);
+        printArray(array);
         
         /* 
         System.out.println("");
-        BubbleSort.bSortComentado(vetor);
+        BubbleSort.bSortComentado(array);
         System.out.println("Vetor ordenado: ");
-        printArray(vetor);
+        printArray(array);
         */
 
         /*
         System.out.println("");
-        BubbleSort.bSortDesc(vetor);
+        BubbleSort.bSortDesc(array);
         System.out.println("Vetor ordenado: ");
-        printArray(vetor);
+        printArray(array);
         */
     }
     
