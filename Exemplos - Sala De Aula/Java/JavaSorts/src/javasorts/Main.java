@@ -42,13 +42,14 @@ public class Main {
         
         switch(op){
             case 1:
+                
+                break;
+            case 2:
                 System.out.println("Dados vetor: ");
                 for(int i = 0; i < vetor.length; i++) {
                     vetor[i] = scanner.nextInt();
                 }
                 break;
-            
-                
         }
         
         System.out.println("Vetor original: ");
