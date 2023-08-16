@@ -38,6 +38,7 @@ public class SelectionSort {
         int tam = array.length;
         Scanner scanner = new Scanner(System.in);
         for(int i = 0; i < tam - 1; i++) {
+            System.out.println("Fase: " + (i + 1));
             int k = indexMinArray(array, i);
             System.out.println("Atual: " + array[i] + "Trocando com menor valor: " + array[k]);
             scanner.nextLine();

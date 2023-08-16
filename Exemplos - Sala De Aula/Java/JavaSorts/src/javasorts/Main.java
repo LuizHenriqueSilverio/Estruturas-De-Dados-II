@@ -59,10 +59,10 @@ public class Main {
         System.out.println("");
         
         // BubbleSort.bSortComentado(array);
-        
         // BubbleSort.bSortDesc(array);
+        //SelectionSort.sSort(array);
         
-        SelectionSort.sSort(array);
+        SelectionSort.sSortComentado(array);
         
         System.out.println("Vetor ordenado: ");
         printArray(array);
