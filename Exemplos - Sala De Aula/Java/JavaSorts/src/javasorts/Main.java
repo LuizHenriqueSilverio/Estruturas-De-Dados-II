@@ -56,20 +56,17 @@ public class Main {
         
         System.out.println("Vetor original: ");
         printArray(array);
+        System.out.println("");
         
-        /* 
-        System.out.println("");
-        BubbleSort.bSortComentado(array);
+        // BubbleSort.bSortComentado(array);
+        
+        // BubbleSort.bSortDesc(array);
+        
+        SelectionSort.sSort(array);
+        
         System.out.println("Vetor ordenado: ");
         printArray(array);
-        */
-
-        /*
-        System.out.println("");
-        BubbleSort.bSortDesc(array);
-        System.out.println("Vetor ordenado: ");
-        printArray(array);
-        */
+        
     }
     
 }
