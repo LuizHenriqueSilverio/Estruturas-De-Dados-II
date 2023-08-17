@@ -13,10 +13,13 @@ import java.util.Scanner;
  */
 public class SelectionSort {
     
+    public static long compara = 0, troca = 0;
+    
     private static int indexMinArray(int array[], int posAtual) {
         int k = posAtual;
         int tam = array.length;
         for(int i = posAtual + 1; i < tam; i++) {
+            compara++;
             if(array[i] < array[k]) {
                 k = i;
             }
@@ -28,6 +31,7 @@ public class SelectionSort {
         int tam = array.length;
         for(int i = 0; i < tam - 1; i++) {
             int k = indexMinArray(array, i);
+            troca++;
             int temp = array[i];
             array[i] = array[k];
             array[k] = temp;

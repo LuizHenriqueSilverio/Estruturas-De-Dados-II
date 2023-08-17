@@ -13,6 +13,8 @@ import java.util.Scanner;
  */
 public class InsertionSort {
     
+    public static long compara = 0, deslocamento = 0;
+    
     private static void insert(int array[], int i) {
         int eleito = array[i];
         int comp = (i - 1);
