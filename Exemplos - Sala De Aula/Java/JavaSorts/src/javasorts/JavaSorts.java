@@ -44,6 +44,7 @@ public class JavaSorts {
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
         int tam;
+        double tempoInicial, tempoFinal;
         
         System.out.println("Tamanho do vetor: ");
         tam = scanner.nextInt();
@@ -76,7 +77,13 @@ public class JavaSorts {
         
         switch(op) {
             case 1:
-                BubbleSort.bSortComentado(array);
+                tempoInicial = System.currentTimeMillis();
+                BubbleSort.bSort(array);
+                //BubbleSort.bSortComentado(array);
+                tempoFinal = System.currentTimeMillis();
+                System.out.println("Comparacoes: " + BubbleSort.compara);
+                System.out.println("Trocas: " + BubbleSort.trocas);
+                System.out.println("Tempo: " + (tempoFinal - tempoInicial) + "ms");
                 break;
             case 2:
                 SelectionSort.sSortComentado(array);

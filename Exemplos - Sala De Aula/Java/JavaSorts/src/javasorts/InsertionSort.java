@@ -20,9 +20,12 @@ public class InsertionSort {
         int comp = (i - 1);
         
         while(comp >= 0 && eleito < array[comp]) {
+            compara++;
             array[comp + 1] = array[comp]; //deslocando
+            deslocamento++;
             comp--;
         }
+        compara++;
         
         array[comp + 1] = eleito;
     }
