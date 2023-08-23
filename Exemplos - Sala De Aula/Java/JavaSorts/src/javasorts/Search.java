@@ -31,7 +31,7 @@ public class Search {
             }else if(x > array[meio]) {
                 ini = meio + 1;
             }else {
-                ini = meio - 1;
+                fim = meio - 1;
             }
         }
         return false;

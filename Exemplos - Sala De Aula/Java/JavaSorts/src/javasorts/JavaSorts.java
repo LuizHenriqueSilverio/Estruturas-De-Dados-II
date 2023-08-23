@@ -23,6 +23,15 @@ public class JavaSorts {
         return op;
     }
     
+    public static int menuBusca() {
+        int op;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1 - Busca Linear");
+        System.out.println("2 - Busca Binária");
+        op = scanner.nextInt();
+        return op;
+    }
+    
     public static int menuSort() {
         int op;
         Scanner scanner = new Scanner(System.in);
@@ -72,8 +81,8 @@ public class JavaSorts {
         
         op = menuSort();
         
-        //System.out.println("Vetor original: ");
-        //printArray(array);
+        System.out.println("Vetor original: ");
+        printArray(array);
         System.out.println("");
         
         switch(op) {
@@ -125,8 +134,8 @@ public class JavaSorts {
                 break;
         }
         
-        //System.out.println("Vetor ordenado: ");
-        //printArray(array);
+        System.out.println("Vetor ordenado: ");
+        printArray(array);
         
     }
     
