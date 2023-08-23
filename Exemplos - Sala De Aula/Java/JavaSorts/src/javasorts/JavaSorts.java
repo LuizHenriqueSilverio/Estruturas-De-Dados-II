@@ -72,8 +72,8 @@ public class JavaSorts {
         
         op = menuSort();
         
-        System.out.println("Vetor original: ");
-        printArray(array);
+        //System.out.println("Vetor original: ");
+        //printArray(array);
         System.out.println("");
         
         switch(op) {
@@ -125,8 +125,8 @@ public class JavaSorts {
                 break;
         }
         
-        System.out.println("Vetor ordenado: ");
-        printArray(array);
+        //System.out.println("Vetor ordenado: ");
+        //printArray(array);
         
     }
     
