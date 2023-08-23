@@ -20,5 +20,20 @@ public class Search {
         return false;
     }
     
-    
+    public static boolean buscaBinaria(int array[], int x) {
+        int ini, fim, meio;
+        ini = 0;
+        fim = (array.length - 1);
+        while(ini <= fim) {
+            meio = (ini + fim) / 2;
+            if(x == array[meio]){
+                return true;
+            }else if(x > array[meio]) {
+                ini = meio + 1;
+            }else {
+                ini = meio - 1;
+            }
+        }
+        return false;
+    }
 }
