@@ -30,6 +30,7 @@ public class JavaSorts {
         System.out.println("1 - BubbleSort");
         System.out.println("2 - SelectionSort");
         System.out.println("3 - InsertionSort");
+        System.out.println("4 - Comparar algoritmos");
         op = scanner.nextInt();
         return op;
     }
@@ -90,6 +91,34 @@ public class JavaSorts {
                 break;
             case 3:
                 InsertionSort.iSortComentado(array);
+                break;
+            case 4:
+                int[] array2 = array.clone();
+                int[] array3 = array.clone();
+                
+                tempoInicial = System.currentTimeMillis();
+                BubbleSort.bSort(array);
+                tempoFinal = System.currentTimeMillis();
+                System.out.println("Comparacoes: " + BubbleSort.compara);
+                System.out.println("Trocas: " + BubbleSort.trocas);
+                System.out.println("Tempo: " + (tempoFinal - tempoInicial) + "ms");
+                System.out.println("");
+                
+                tempoInicial = System.currentTimeMillis();
+                SelectionSort.sSort(array2);
+                tempoFinal = System.currentTimeMillis();
+                System.out.println("Comparacoes: " + SelectionSort.compara);
+                System.out.println("Trocas: " + SelectionSort.troca);
+                System.out.println("Tempo: " + (tempoFinal - tempoInicial) + "ms");
+                System.out.println("");
+                
+                tempoInicial = System.currentTimeMillis();
+                InsertionSort.iSort(array3);
+                tempoFinal = System.currentTimeMillis();
+                System.out.println("Comparacoes: " + InsertionSort.compara);
+                System.out.println("Deslocamentos: " + InsertionSort.deslocamento);
+                System.out.println("Tempo: " + (tempoFinal - tempoInicial) + "ms");
+                System.out.println("");
                 break;
             default:
                 System.out.println("Opcao invalida!");
