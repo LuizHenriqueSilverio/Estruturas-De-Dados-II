@@ -12,7 +12,9 @@ package javasorts;
 public class Search {
     
     public static boolean buscaLinear(int array[], int x) {
+        int compLinear = 0;
         for(int i = 0; i < array.length; i++) {
+            compLinear++;
             if(array[i] == x) {
                 return true;
             }
@@ -24,8 +26,10 @@ public class Search {
         int ini, fim, meio;
         ini = 0;
         fim = (array.length - 1);
+        int compBinaria = 0;
         while(ini <= fim) {
             meio = (ini + fim) / 2;
+            compBinaria++;
             if(x == array[meio]){
                 return true;
             }else if(x > array[meio]) {
