@@ -50,6 +50,12 @@ public class JavaSorts {
         }
     }
     
+    public static void printIntervalo(int array[], int ini, int fim) {
+        for(int i = ini; i <= fim; i++){
+            System.out.print(array[i] + " | ");
+        }
+    }
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
