@@ -21,8 +21,8 @@ public class Search {
                 return true;
             }
         }
-        return false;
         compLinear = 0;
+        return false;
     }
     
     public static boolean buscaBinaria(int array[], int x) {
