@@ -11,27 +11,30 @@ package javasorts;
  */
 public class Search {
     
+    public static int compLinear = 0, compBinaria = 0;
+    
     public static boolean buscaLinear(int array[], int x) {
-        int compLinear = 0;
         for(int i = 0; i < array.length; i++) {
             compLinear++;
             if(array[i] == x) {
                 return true;
+                compLinear = 0;
             }
         }
         return false;
+        compLinear = 0;
     }
     
     public static boolean buscaBinaria(int array[], int x) {
         int ini, fim, meio;
         ini = 0;
         fim = (array.length - 1);
-        int compBinaria = 0;
         while(ini <= fim) {
             meio = (ini + fim) / 2;
             compBinaria++;
             if(x == array[meio]){
                 return true;
+                compBinaria = 0;
             }else if(x > array[meio]) {
                 ini = meio + 1;
             }else {
@@ -39,5 +42,6 @@ public class Search {
             }
         }
         return false;
+        compBinaria = 0;
     }
 }
