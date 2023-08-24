@@ -17,8 +17,8 @@ public class Search {
         for(int i = 0; i < array.length; i++) {
             compLinear++;
             if(array[i] == x) {
-                return true;
                 compLinear = 0;
+                return true;
             }
         }
         return false;
@@ -33,8 +33,8 @@ public class Search {
             meio = (ini + fim) / 2;
             compBinaria++;
             if(x == array[meio]){
-                return true;
                 compBinaria = 0;
+                return true;
             }else if(x > array[meio]) {
                 ini = meio + 1;
             }else {
