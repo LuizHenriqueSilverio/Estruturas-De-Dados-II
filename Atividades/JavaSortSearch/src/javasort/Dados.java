@@ -100,10 +100,18 @@ public class Dados implements Comparable<Dados>{
               compareTo(outroDado.getCidade());
     }
     
-    
      @Override
     public String toString(){
         return getCidade()+ " : " + getCondicao() ;
     }// fim toString
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dados dados = (Dados) o;
+        return cidade.equals(dados.cidade);
+    }
+
     
 }

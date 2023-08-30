@@ -8,10 +8,14 @@ public class FormSistema extends javax.swing.JFrame {
     ArrayList<Dados> lista = new ArrayList<>();
    // Definir os comparadores
 
+    Comparator<Dados> comparaData = (Dados d1, Dados d2) -> d1.getData().compareTo(d2.getData());
+    
+    Comparator<Dados> comparaTempMinima = (Dados d1, Dados d2) -> d1.getTemperaturaMinima() - d2.getTemperaturaMinima();
     
     public FormSistema() {
         initComponents();
         carregaArquivo();
+        mostra();
     }
 
 
@@ -207,6 +211,17 @@ public class FormSistema extends javax.swing.JFrame {
     
     private void btnOrdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdNomeActionPerformed
        // switch case para escolher por qual comparador ordenar
+        switch(cbOrdena.getSelectedIndex()) {
+            case 0: 
+                lista.sort(comparaData);
+                break;
+            case 1:
+                Collections.sort(lista);
+                break;
+            case 2:
+                lista.sort(comparaTempMinima);
+                break;
+        }
         mostra();
     }//GEN-LAST:event_btnOrdNomeActionPerformed
 
