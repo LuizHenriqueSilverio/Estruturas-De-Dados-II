@@ -76,7 +76,7 @@ public class JavaSorts {
                 break;
             case 2:
                 System.out.println("Dados vetor: ");
-                for(int i = 0; i < array.length - 15; i++) {
+                for(int i = 0; i < array.length - 1; i++) {
                     array[i] = scanner.nextInt();
                 }
                 break;
