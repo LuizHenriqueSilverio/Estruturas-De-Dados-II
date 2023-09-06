@@ -17,6 +17,7 @@ public class Main {
         for(int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " | ");
         }
+        System.out.println("");
     }
     
     public static int menuEntrada() {
@@ -57,8 +58,6 @@ public class Main {
         }
         
         System.out.println("Vetor original: ");
-        printArray(array);
-        System.out.println("");
         
         HeapSort.hSort(array);
         System.out.println("Vetor ordenado: ");
