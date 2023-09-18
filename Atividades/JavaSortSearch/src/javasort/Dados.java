@@ -96,8 +96,7 @@ public class Dados implements Comparable<Dados>{
     
     @Override    
     public int compareTo(Dados outroDado){
-      return this.getCidade().
-              compareTo(outroDado.getCidade());
+      return this.getCidade().compareTo(outroDado.getCidade());
     }
     
      @Override

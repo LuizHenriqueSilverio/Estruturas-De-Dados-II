@@ -223,7 +223,7 @@ public class FormSistema extends javax.swing.JFrame {
     //https://1bestcsharp.blogspot.com/2016/03/java-populate-jtable-from-arraylist.html
     void mostra(){
         //limpando a tabela
-        tabelaDados.setModel(new DefaultTableModel(null,new String[]{"Data","Cidade","Condição","Tendencia","Máxima","Minima","Vento Max", "Vento Min", "Direção"}));
+        tabelaDados.setModel(new DefaultTableModel(null,new String[]{"Data","Cidade","Condição","Tendencia","Mínima","Máxima","Vento Min", "Vento Max", "Direção"}));
        
         DefaultTableModel model = 
                 (DefaultTableModel)tabelaDados.getModel();
