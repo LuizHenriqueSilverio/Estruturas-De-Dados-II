@@ -1,4 +1,5 @@
 package javasort;
+import java.awt.Rectangle;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -8,9 +9,13 @@ public class FormSistema extends javax.swing.JFrame {
     ArrayList<Dados> lista = new ArrayList<>();
    // Definir os comparadores
 
-    Comparator<Dados> comparaScore = (Dados d1, Dados d2) -> Double.compare(d1.getScore(), d2.getScore());
+    Comparator<Dados> comparaScore = (Dados d1, Dados d2) -> Double.compare(d2.getScore(), d1.getScore());
     
     Comparator<Dados> comparaReleaseYear = (Dados d1, Dados d2) -> d1.getReleaseYear()- d2.getReleaseYear();
+    
+    Comparator<Dados> comparaGenre = (Dados d1, Dados d2) -> d1.getGenre().compareTo(d2.getGenre());
+    
+    Comparator<Dados> comparaRecEditor = (Dados d1, Dados d2) -> d2.getEditorsChoice().compareTo(d1.getEditorsChoice());
     
     public FormSistema() {
         initComponents();
@@ -45,9 +50,9 @@ public class FormSistema extends javax.swing.JFrame {
 
         lblProx.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         lblProx.setForeground(new java.awt.Color(255, 255, 255));
-        lblProx.setText("Sistema de Informações Climáticas da Amazônia");
+        lblProx.setText("Classificações da IGN Games");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/clima-quente.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/controller-icon-32405.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -66,7 +71,7 @@ public class FormSistema extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
@@ -101,7 +106,7 @@ public class FormSistema extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaDados);
 
-        cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Score", "Cidade", "Release Year", "Máxima", "Vento Min", "Vento Max", " " }));
+        cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Score", "Título", "Ano de Lançamento", "Gênero", "Recomendação do Editor", " ", " " }));
         cbOrdena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOrdenaActionPerformed(evt);
@@ -202,25 +207,16 @@ public class FormSistema extends javax.swing.JFrame {
                 leitura = line.split(",");
                 
                 if(leitura.length > 0 && leitura[0].matches("\\d+") && leitura[7].matches("\\d+") && leitura[8].matches("\\d+")){
-                game.setId(Integer.parseInt(leitura[0]));
-                game.setScorePhrase(leitura[1]);
-                game.setTitle(leitura[2]);
-                game.setPlatform(leitura[3]);
-                game.setScore(Double.parseDouble(leitura[4]));
-                game.setGenre(leitura[5]);
-                game.setEditorsChoice(leitura[6]);
-                game.setReleaseYear(Integer.parseInt(leitura[7]));
-                game.setReleaseMonth(Integer.parseInt(leitura[8]));
-                /*System.out.println(leitura[0]+"\n");
-                System.out.println(leitura[1]+"\n");
-                System.out.println(leitura[2]+"\n");
-                System.out.println(leitura[3]+"\n");
-                System.out.println(leitura[4]+"\n");
-                System.out.println(leitura[5]+"\n");
-                System.out.println(leitura[6]+"\n");
-                System.out.println(leitura[7]+"\n");
-                System.out.println(leitura[8]+"\n");*/
-                lista.add(game);
+                    game.setId(Integer.parseInt(leitura[0]));
+                    game.setScorePhrase(leitura[1]);
+                    game.setTitle(leitura[2]);
+                    game.setPlatform(leitura[3]);
+                    game.setScore(Double.parseDouble(leitura[4]));
+                    game.setGenre(leitura[5]);
+                    game.setEditorsChoice(leitura[6]);
+                    game.setReleaseYear(Integer.parseInt(leitura[7]));
+                    game.setReleaseMonth(Integer.parseInt(leitura[8]));
+                    lista.add(game);
                 }
             }// fim percurso no arquivo
             mostra();
@@ -231,10 +227,9 @@ public class FormSistema extends javax.swing.JFrame {
     //https://1bestcsharp.blogspot.com/2016/03/java-populate-jtable-from-arraylist.html
     void mostra(){
         //limpando a tabela
-        tabelaDados.setModel(new DefaultTableModel(null,new String[]{"ID","Cidade","Título","Plataforma","Pontuação","Gênero","Escolha do Editor", "Ano de Lançamento", "Mês de Lançamento"}));
+        tabelaDados.setModel(new DefaultTableModel(null,new String[]{"ID","Classificação","Título","Plataforma","Pontuação","Gênero","Escolha do Editor", "Ano de Lançamento", "Mês de Lançamento"}));
        
-        DefaultTableModel model = 
-                (DefaultTableModel)tabelaDados.getModel();
+        DefaultTableModel model = (DefaultTableModel)tabelaDados.getModel();
         Object rowData[] = new Object[9];// qtd colunas
         for(Dados d: lista)
         {
@@ -247,7 +242,7 @@ public class FormSistema extends javax.swing.JFrame {
             rowData[6] = d.getEditorsChoice();
             rowData[7] = d.getReleaseYear();
             rowData[8] = d.getReleaseMonth();
-            System.out.println("TempMin:"+d.getPlatform()+"\n");
+            System.out.println("Plataforma:"+d.getPlatform()+"\n");
             model.addRow(rowData);
         }// fim preenche modelo
     }// fim mostra
@@ -268,6 +263,12 @@ public class FormSistema extends javax.swing.JFrame {
             case 2:
                 lista.sort(comparaReleaseYear);
                 break;
+            case 3:
+                lista.sort(comparaGenre);
+                break;
+            case 4:
+                lista.sort(comparaRecEditor);
+                break;
         }
         mostra();
     }//GEN-LAST:event_btnOrdNomeActionPerformed
@@ -276,17 +277,52 @@ public class FormSistema extends javax.swing.JFrame {
         Dados dadoBusca = new Dados();
         dadoBusca.setTitle(txtBusca.getText());
         int r = -1;
+        int comp = 0;
         
         if(rbLinear.isSelected()) {
-            r = lista.indexOf(txtBusca.getText());
+            for (int i = 0; i < lista.size(); i++) {
+                comp++;
+                Dados game = lista.get(i);
+                if (game.getTitle().equals(dadoBusca.getTitle())) {
+                    r = i; 
+                    break; 
+                }
+            }
         }else if(rbBinaria.isSelected()) {
-            r = Collections.binarySearch(lista, dadoBusca);
+            int left = 0;
+            int right = lista.size() - 1;
+
+            while (left <= right) {
+                int middle = (left + right) / 2;
+                Dados game = lista.get(middle);
+                comp++;
+
+                int comparison = game.getTitle().compareTo(dadoBusca.getTitle());
+
+                if (comparison == 0) {
+                    r = middle;
+                    break;
+                } else if (comparison < 0) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
+            }
+
+        }
+        
+        int rowIndex = r;
+        if (rowIndex != -1) {
+            tabelaDados.setRowSelectionInterval(rowIndex, rowIndex);
+            Rectangle cellRect = tabelaDados.getCellRect(rowIndex, 0, true); 
+            tabelaDados.scrollRectToVisible(cellRect); 
         }
         
         if(r == -1) {
             JOptionPane.showMessageDialog(null, "Não encontrado: " + r);
         }else {
             JOptionPane.showMessageDialog(null, "Encontrado, index: " + r);
+            JOptionPane.showMessageDialog(null, "Número de comparações: " + comp);
         }
     }//GEN-LAST:event_btnBuscaActionPerformed
 
