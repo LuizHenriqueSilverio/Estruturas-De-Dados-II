@@ -2,106 +2,167 @@
 package javasort;
 //import java.lang.Comparable;
 public class Dados implements Comparable<Dados>{
-   private String data;
-   private String cidade;
-   private String condicao;
-   private String temperaturaTendencia;
-   private int temperaturaMinima;
-   private int temperaturaMaxima;
-   private int ventoVelocidadeMinima;
-   private int ventoVelocidadeMaxima;
-   private String ventoDirecao;
-
-
-    public String getData() {
-        return data;
+   
+    private int id;
+    private String scorePhrase;
+    private String title;
+    private String platform;
+    private double score;
+    private String genre;
+    private String editorsChoice;
+    private int releaseYear;
+    private int releaseMonth;
+    private int releaseDay;
+    
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
-
-    public String getCidade() {
-        return cidade;
+    /**
+     * @return the scorePhrase
+     */
+    public String getScorePhrase() {
+        return scorePhrase;
     }
 
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    /**
+     * @param scorePhrase the scorePhrase to set
+     */
+    public void setScorePhrase(String scorePhrase) {
+        this.scorePhrase = scorePhrase;
     }
 
-    public String getCondicao() {
-        return condicao;
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
     }
 
-
-    public void setCondicao(String condicao) {
-        this.condicao = condicao;
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-
-    public String getTemperaturaTendencia() {
-        return temperaturaTendencia;
+    /**
+     * @return the platform
+     */
+    public String getPlatform() {
+        return platform;
     }
 
-    public void setTemperaturaTendencia(String temperaturaTendencia) {
-        this.temperaturaTendencia = temperaturaTendencia;
+    /**
+     * @param platform the platform to set
+     */
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 
-
-    public int getTemperaturaMinima() {
-        return temperaturaMinima;
+    /**
+     * @return the score
+     */
+    public double getScore() {
+        return score;
     }
 
-
-    public void setTemperaturaMinima(int temperaturaMinima) {
-        this.temperaturaMinima = temperaturaMinima;
+    /**
+     * @param score the score to set
+     */
+    public void setScore(double score) {
+        this.score = score;
     }
 
-
-    public int getTemperaturaMaxima() {
-        return temperaturaMaxima;
+    /**
+     * @return the genre
+     */
+    public String getGenre() {
+        return genre;
     }
 
-
-    public void setTemperaturaMaxima(int temperaturaMaxima) {
-        this.temperaturaMaxima = temperaturaMaxima;
+    /**
+     * @param genre the genre to set
+     */
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-
-    public int getVentoVelocidadeMinima() {
-        return ventoVelocidadeMinima;
+    /**
+     * @return the editorsChoice
+     */
+    public String getEditorsChoice() {
+        return editorsChoice;
     }
 
-    public void setVentoVelocidadeMinima(int ventoVelocidadeMinima) {
-        this.ventoVelocidadeMinima = ventoVelocidadeMinima;
-    }
- 
-    public int getVentoVelocidadeMaxima() {
-        return ventoVelocidadeMaxima;
-    }
-
-    public void setVentoVelocidadeMaxima(int ventoVelocidadeMaxima) {
-        this.ventoVelocidadeMaxima = ventoVelocidadeMaxima;
+    /**
+     * @param editorsChoice the editorsChoice to set
+     */
+    public void setEditorsChoice(String editorsChoice) {
+        this.editorsChoice = editorsChoice;
     }
 
-     public String getVentoDirecao() {
-        return ventoDirecao;
+    /**
+     * @return the releaseYear
+     */
+    public int getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setVentoDirecao(String ventoDirecao) {
-        this.ventoDirecao = ventoDirecao;
+    /**
+     * @param releaseYear the releaseYear to set
+     */
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
     }
+
+    /**
+     * @return the releaseMonth
+     */
+    public int getReleaseMonth() {
+        return releaseMonth;
+    }
+
+    /**
+     * @param releaseMonth the releaseMonth to set
+     */
+    public void setReleaseMonth(int releaseMonth) {
+        this.releaseMonth = releaseMonth;
+    }
+
+    /**
+     * @return the releaseDay
+     */
+    public int getReleaseDay() {
+        return releaseDay;
+    }
+
+    /**
+     * @param releaseDay the releaseDay to set
+     */
+    public void setReleaseDay(int releaseDay) {
+        this.releaseDay = releaseDay;
+    }
+    
     
     @Override    
     public int compareTo(Dados outroDado){
-      return this.getCidade().compareTo(outroDado.getCidade());
+      return this.getTitle().compareTo(outroDado.getTitle());
     }
     
      @Override
     public String toString(){
-        return getCidade()+ " : " + getCondicao() ;
+        return getTitle()+ " : " + getGenre() + " : " + getScore() + "(" + getScorePhrase()  + ")";
     }// fim toString
     
     @Override
@@ -109,8 +170,8 @@ public class Dados implements Comparable<Dados>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dados dados = (Dados) o;
-        return cidade.equals(dados.cidade);
+        return title.equals(dados.title);
     }
-
     
+
 }

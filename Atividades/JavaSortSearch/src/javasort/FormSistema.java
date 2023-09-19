@@ -8,9 +8,9 @@ public class FormSistema extends javax.swing.JFrame {
     ArrayList<Dados> lista = new ArrayList<>();
    // Definir os comparadores
 
-    Comparator<Dados> comparaData = (Dados d1, Dados d2) -> d1.getData().compareTo(d2.getData());
+    Comparator<Dados> comparaScore = (Dados d1, Dados d2) -> Double.compare(d1.getScore(), d2.getScore());
     
-    Comparator<Dados> comparaTempMinima = (Dados d1, Dados d2) -> d1.getTemperaturaMinima() - d2.getTemperaturaMinima();
+    Comparator<Dados> comparaReleaseYear = (Dados d1, Dados d2) -> d1.getReleaseYear()- d2.getReleaseYear();
     
     public FormSistema() {
         initComponents();
@@ -101,7 +101,12 @@ public class FormSistema extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaDados);
 
-        cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Cidade", "Minima", "Máxima", "Vento Min", "Vento Max", " " }));
+        cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Score", "Cidade", "Release Year", "Máxima", "Vento Min", "Vento Max", " " }));
+        cbOrdena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbOrdenaActionPerformed(evt);
+            }
+        });
 
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/task.png"))); // NOI18N
         btnBusca.setText("Buscar");
@@ -188,22 +193,24 @@ public class FormSistema extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void carregaArquivo(){
-     String csvFile = "dados_tempo_import.csv";
+     String csvFile = "ign_games.csv";
         String line = "";
         String[] leitura = null;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                Dados tempo = new Dados();
+                Dados game = new Dados();
                 leitura = line.split(",");
-                tempo.setData(leitura[0]);
-                tempo.setCidade(leitura[1]);
-                tempo.setCondicao(leitura[2]);
-                tempo.setTemperaturaTendencia(leitura[3]);
-                tempo.setTemperaturaMinima(Integer.parseInt(leitura[4]));
-                tempo.setTemperaturaMaxima(Integer.parseInt(leitura[5]));
-                tempo.setVentoVelocidadeMinima(Integer.parseInt(leitura[6]));
-                tempo.setVentoVelocidadeMaxima(Integer.parseInt(leitura[7]));
-                tempo.setVentoDirecao(leitura[8]);
+                
+                if(leitura.length > 0 && leitura[0].matches("\\d+") && leitura[7].matches("\\d+") && leitura[8].matches("\\d+")){
+                game.setId(Integer.parseInt(leitura[0]));
+                game.setScorePhrase(leitura[1]);
+                game.setTitle(leitura[2]);
+                game.setPlatform(leitura[3]);
+                game.setScore(Double.parseDouble(leitura[4]));
+                game.setGenre(leitura[5]);
+                game.setEditorsChoice(leitura[6]);
+                game.setReleaseYear(Integer.parseInt(leitura[7]));
+                game.setReleaseMonth(Integer.parseInt(leitura[8]));
                 /*System.out.println(leitura[0]+"\n");
                 System.out.println(leitura[1]+"\n");
                 System.out.println(leitura[2]+"\n");
@@ -213,7 +220,8 @@ public class FormSistema extends javax.swing.JFrame {
                 System.out.println(leitura[6]+"\n");
                 System.out.println(leitura[7]+"\n");
                 System.out.println(leitura[8]+"\n");*/
-                lista.add(tempo); 
+                lista.add(game);
+                }
             }// fim percurso no arquivo
             mostra();
         } catch (IOException e) {
@@ -223,23 +231,23 @@ public class FormSistema extends javax.swing.JFrame {
     //https://1bestcsharp.blogspot.com/2016/03/java-populate-jtable-from-arraylist.html
     void mostra(){
         //limpando a tabela
-        tabelaDados.setModel(new DefaultTableModel(null,new String[]{"Data","Cidade","Condição","Tendencia","Mínima","Máxima","Vento Min", "Vento Max", "Direção"}));
+        tabelaDados.setModel(new DefaultTableModel(null,new String[]{"ID","Cidade","Título","Plataforma","Pontuação","Gênero","Escolha do Editor", "Ano de Lançamento", "Mês de Lançamento"}));
        
         DefaultTableModel model = 
                 (DefaultTableModel)tabelaDados.getModel();
         Object rowData[] = new Object[9];// qtd colunas
         for(Dados d: lista)
         {
-            rowData[0] = d.getData();
-            rowData[1] = d.getCidade();
-            rowData[2] = d.getCondicao();
-            rowData[3] = d.getTemperaturaTendencia();
-            rowData[4] = d.getTemperaturaMinima();
-            rowData[5] = d.getTemperaturaMaxima();
-            rowData[6] = d.getVentoVelocidadeMinima();
-            rowData[7] = d.getVentoVelocidadeMaxima();
-            rowData[8] = d.getVentoDirecao();
-            System.out.println("TempMin:"+d.getTemperaturaMinima()+"\n");
+            rowData[0] = d.getId();
+            rowData[1] = d.getScorePhrase();
+            rowData[2] = d.getTitle();
+            rowData[3] = d.getPlatform();
+            rowData[4] = d.getScore();
+            rowData[5] = d.getGenre();
+            rowData[6] = d.getEditorsChoice();
+            rowData[7] = d.getReleaseYear();
+            rowData[8] = d.getReleaseMonth();
+            System.out.println("TempMin:"+d.getPlatform()+"\n");
             model.addRow(rowData);
         }// fim preenche modelo
     }// fim mostra
@@ -252,13 +260,13 @@ public class FormSistema extends javax.swing.JFrame {
        // switch case para escolher por qual comparador ordenar
         switch(cbOrdena.getSelectedIndex()) {
             case 0: 
-                lista.sort(comparaData);
+                lista.sort(comparaScore);
                 break;
             case 1:
                 Collections.sort(lista);
                 break;
             case 2:
-                lista.sort(comparaTempMinima);
+                lista.sort(comparaReleaseYear);
                 break;
         }
         mostra();
@@ -266,7 +274,7 @@ public class FormSistema extends javax.swing.JFrame {
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         Dados dadoBusca = new Dados();
-        dadoBusca.setCidade(txtBusca.getText());
+        dadoBusca.setTitle(txtBusca.getText());
         int r = -1;
         
         if(rbLinear.isSelected()) {
@@ -281,6 +289,10 @@ public class FormSistema extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Encontrado, index: " + r);
         }
     }//GEN-LAST:event_btnBuscaActionPerformed
+
+    private void cbOrdenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbOrdenaActionPerformed
 
     /**
      * @param args the command line arguments
