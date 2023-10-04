@@ -18,6 +18,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
     
     private Node<T> insert(Node<T> root, Node<T> newNode) {
-        
+        return newNode;
     }
 }
