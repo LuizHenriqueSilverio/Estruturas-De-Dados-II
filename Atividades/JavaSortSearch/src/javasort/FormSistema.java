@@ -46,8 +46,9 @@ public class FormSistema extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(60, 0, 195));
 
+        lblProx.setBackground(new java.awt.Color(100, 0, 255));
         lblProx.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         lblProx.setForeground(new java.awt.Color(255, 255, 255));
         lblProx.setText("Classificações da IGN Games");
