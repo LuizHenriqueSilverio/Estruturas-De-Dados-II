@@ -12,6 +12,7 @@ package binaryform;
 public class Pokemon implements Comparable<Pokemon>{
     private int id;
     private String name;
+    private int totalPc;
 
     /**
      * @return the id
@@ -39,6 +40,19 @@ public class Pokemon implements Comparable<Pokemon>{
      */
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public void setTotalPc(int totalPc) {
+        this.totalPc = totalPc;
+    }
+    
+    public int getTotalPc() {
+        return this.totalPc;
+    }
+
+    @Override
+    public int compareTo(Pokemon other) {
+        return Integer.compare(this.getTotalPc(), other.getTotalPc());
     }
     
     
