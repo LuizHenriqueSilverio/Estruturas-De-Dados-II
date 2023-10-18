@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package binaryform;
+package binarytreesearch;
 
 /**
  *
@@ -11,7 +11,8 @@ package binaryform;
  */
 public class Node<T extends Comparable<T>> {
     T data;
-    Node<T> left, right;
+    Node<T> left;
+    Node<T> right;
     
     public Node(T data){
         this.data = data;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package binaryform;
+package binarytreesearch;
 
 /**
  *
@@ -11,13 +11,17 @@ package binaryform;
  */
 public class BinarySearchTree<T extends Comparable<T>> {
     Node root = null;
+    int count;
     
-    public void add(T newData) {
+    public int add(T newData) {
         Node<T> newNode = new Node<T>(newData);
+        count = 0;
         root = insert(root, newNode);
+        return count;
     }
     
     private Node<T> insert(Node<T> root, Node<T> newNode) {
+        count++;
         if(root == null) {
             return newNode;
         }
@@ -30,10 +34,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         
         return root; //retorna a raiz atualizada.
     }
-    
+  
     public void preOrder() {
         preOrder(root);
     }
+    
     
     private void preOrder(Node<T> root) {
         if(root != null) {
@@ -54,6 +59,41 @@ public class BinarySearchTree<T extends Comparable<T>> {
             inOrder(root.right);
         }
     }
+    
+    
+    public String getStudentDataPreOrder() {
+        StringBuilder studentData = new StringBuilder();
+        getStudentDataPreOrder(root, studentData);
+        return studentData.toString();
+    }
+    
+    public void getStudentDataPreOrder(Node<T> root, StringBuilder studentData) {
+        if(root != null) {
+            studentData.append(root.data.toString() + "\n");
+            getStudentDataPreOrder(root.left, studentData);
+            getStudentDataPreOrder(root.right, studentData);
+        }
+    }
+    
+    /*
+    
+    Mostra os alunos em ordem
+    
+    public String getStudentDataInOrder() {
+        StringBuilder studentData = new StringBuilder();
+        getStudentDataInOrder(root, studentData);
+        return studentData.toString();
+    }
+
+    private void getStudentDataInOrder(Node<T> root, StringBuilder studentData) {
+        if (root != null) {
+            getStudentDataInOrder(root.left, studentData);
+            studentData.append(root.data.toString() + "\n");
+            getStudentDataInOrder(root.right, studentData);
+        }
+    }
+    */
+
     
     public void postOrder() {
         postOrder(root);
