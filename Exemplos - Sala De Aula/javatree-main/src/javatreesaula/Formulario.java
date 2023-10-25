@@ -1,11 +1,10 @@
 
-package binarytreesearch;
+package javatreesaula;
 import java.io.*;
 import javax.swing.JOptionPane;
 
 public class Formulario extends javax.swing.JFrame {
-
-    BinarySearchTree tree = new BinarySearchTree<>();
+    BinarySearchTree<Aluno> tree = new BinarySearchTree<>();
        
     public Formulario() {
         initComponents();
@@ -27,6 +26,7 @@ public class Formulario extends javax.swing.JFrame {
         listMostraDados = new javax.swing.JTextArea();
         btnLoadFile = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -48,7 +48,7 @@ public class Formulario extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,7 +100,7 @@ public class Formulario extends javax.swing.JFrame {
         txtNome.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
         getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 560, -1));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/binarytreesearch/adicionar-botao.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javatreesaula/adicionar-botao.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,9 +114,9 @@ public class Formulario extends javax.swing.JFrame {
         listMostraDados.setRows(5);
         jScrollPane1.setViewportView(listMostraDados);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 680, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 560, 220));
 
-        btnLoadFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/binarytreesearch/csv.png"))); // NOI18N
+        btnLoadFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javatreesaula/csv.png"))); // NOI18N
         btnLoadFile.setText("Load file");
         btnLoadFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +126,7 @@ public class Formulario extends javax.swing.JFrame {
         getContentPane().add(btnLoadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 120, 40));
         btnLoadFile.getAccessibleContext().setAccessibleName("CSV");
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/binarytreesearch/procurar.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javatreesaula/procurar.png"))); // NOI18N
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,25 +135,33 @@ public class Formulario extends javax.swing.JFrame {
         });
         getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 170, 110, 40));
 
+        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javatreesaula/remover.png"))); // NOI18N
+        btnRemover.setText("Remove");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 220, 110, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void loadFile(BinarySearchTree tree){
+    private void carregaArquivo(BinarySearchTree<Aluno> tree){
      String csvFile = "dados.csv";
         String line = "";
         String[] leitura = null;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                Student student = new Student();
+                Aluno aluno = new Aluno();
                 leitura = line.split(",");
-                System.out.println(leitura[0]+" " + leitura[1]);
-                student.setMatricula(Integer.parseInt(leitura[0]));
-                student.setNome(leitura[1]);
-                int qtd = tree.add(student);
-                listMostraDados.append("Comparações para inserção: " + qtd +"\n");
-                
+               // System.out.println(leitura[0]+" " + leitura[1]);
+                aluno.setMatricula(Integer.parseInt(leitura[0]));
+                aluno.setNome(leitura[1]);
+                int qtd= tree.add(aluno); 
+                tree.preOrder(listMostraDados);
+                listMostraDados.append("Comparações para inserção:"+qtd+"\n");
             }// fim percurso no arquivo
-            String studentData = tree.getStudentDataPreOrder();
-            listMostraDados.append(studentData);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -161,33 +169,39 @@ public class Formulario extends javax.swing.JFrame {
     
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-       Student student = new Student();
-       student.setMatricula(Integer.parseInt(txtCodigo.getText()));
-       student.setNome(txtNome.getText());
-       
-       int qtd = tree.add(student);
-       String studentData = tree.getStudentDataPreOrder();
-       listMostraDados.setText("");
-       listMostraDados.append("Comparações para inserção: " + qtd + "\n");
-       listMostraDados.append(studentData);
-       
+           Aluno al = new Aluno();
+           al.setMatricula(Integer.parseInt(txtCodigo.getText()));
+           al.setNome(txtNome.getText());
+           int retorno = tree.add(al);
+           tree.preOrder(listMostraDados);
+           listMostraDados.append("Comparações:"+retorno+"\n");
+           txtCodigo.setText("");
+           txtNome.setText("");
+           txtCodigo.setFocusable(rootPaneCheckingEnabled);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnLoadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadFileActionPerformed
-        loadFile(tree);
+        carregaArquivo(tree);
     }//GEN-LAST:event_btnLoadFileActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        Student searchStudent = new Student();
-        searchStudent.setMatricula(Integer.parseInt(txtCodigo.getText()));
-        searchStudent = (Student) tree.search(searchStudent);
-        
-        if(searchStudent == null) {
-            JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
-        }else {
-            JOptionPane.showMessageDialog(null, "Nome: " + searchStudent.getNome() + ", Matrícula: " + searchStudent.getMatricula());
-        }
+        Aluno alunodeBusca = new Aluno();
+        alunodeBusca.setMatricula
+            (Integer.parseInt(txtCodigo.getText()));
+        alunodeBusca = tree.buscar(alunodeBusca);
+        if(alunodeBusca==null)
+            JOptionPane.showMessageDialog
+                  (rootPane, "Não encontrado :(");
+        else
+            JOptionPane.showMessageDialog
+                  (rootPane, "Nome:"+alunodeBusca.getNome());   
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        tree.remove(new Aluno(Integer.parseInt(txtCodigo.getText()), txtNome.getText()));
+        listMostraDados.append("\n Após remoção\n");
+        tree.preOrder(listMostraDados);
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,6 +241,7 @@ public class Formulario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnLoadFile;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

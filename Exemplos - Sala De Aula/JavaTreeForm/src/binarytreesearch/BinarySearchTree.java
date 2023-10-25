@@ -94,26 +94,29 @@ public class BinarySearchTree<T extends Comparable<T>> {
             getStudentDataPreOrder(root.right, studentData);
         }
     }
-    
-    /*
-    
-    Mostra os alunos em ordem
-    
-    public String getStudentDataInOrder() {
-        StringBuilder studentData = new StringBuilder();
-        getStudentDataInOrder(root, studentData);
-        return studentData.toString();
-    }
 
-    private void getStudentDataInOrder(Node<T> root, StringBuilder studentData) {
-        if (root != null) {
-            getStudentDataInOrder(root.left, studentData);
-            studentData.append(root.data.toString() + "\n");
-            getStudentDataInOrder(root.right, studentData);
+    public Node<T> removeNode(Node<T> root) {
+        Node<T> newRoot, parent;
+        if(root.right == null) {
+            newRoot = root.left;
+            return newRoot;
         }
+        
+        parent = root;
+        newRoot = root.right;
+        while(newRoot.left != null){
+            parent = newRoot;
+            newRoot = newRoot.left;
+        }
+        
+        if(parent != root) {
+            parent.left = newRoot.right;
+            newRoot.right = root.right;
+        }
+        
+        newRoot.left = root.left;
+        return newRoot;
     }
-    */
-
     
     public void postOrder() {
         postOrder(root);
