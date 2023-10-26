@@ -97,47 +97,46 @@ public class AVLTree<T extends Comparable<T>>{
        
     public Node<T> removeNode(Node<T> root) {
         Node<T> newRoot, parent;
-        if(root.right==null){
+        if(root.right == null){
             newRoot = root.left;
             return newRoot;
         }
         // percorrer até achar o menor da right
-        parent = root; newRoot= root.right;
+        parent = root; newRoot = root.right;
         while(newRoot.left!=null){
-		parent=newRoot;
+		parent = newRoot;
 		newRoot = newRoot.left;
 	}// fim while
         
         // reorganizar os ponteiros
-	if(parent!=root){
+	if(parent != root){
 		parent.left = newRoot.right;
 		newRoot.right = root.right;
 	}
         
         newRoot.left = root.left;
-        System.out.println("Retornando nova raiz:"+newRoot.data);
+        System.out.println("Retornando nova raiz: " + newRoot.data);
 	return newRoot;
     }
 
-    public void remove(T dadoRemover) {
-        root = remove(this.root, dadoRemover);
+    public void remove(T removeData) {
+        root = remove(this.root, removeData);
     }
 
-    public Node<T> remove(Node<T> raiz, T dadoRemover) {
-            if(raiz==null){
+    public Node<T> remove(Node<T> root, T removeData) {
+            if(root == null){
                     System.out.println("Não encontrado - :(");
                     return null;
             }
-            if(raiz.data.equals(dadoRemover)){
+            if(root.data.equals(removeData)){
                     System.out.println("Encontrado - removendo");
-                    return removeNode(raiz);
+                    return removeNode(root);
             }
-            if(dadoRemover.compareTo(raiz.data)<0)
-                    raiz.left = remove(raiz.left,dadoRemover);
+            if(removeData.compareTo(root.data) < 0)
+                    root.left = remove(root.left,removeData);
             else
-                raiz.right = remove(raiz.right,dadoRemover);
-
-            return raiz;
+                root.right = remove(root.right,removeData);
+            return root;
     }// fim buscaRemove
 
     public int height(Node root) {
@@ -157,5 +156,26 @@ public class AVLTree<T extends Comparable<T>>{
         }
        	
     }// fim funcao height
+    
+    public Node<T> rightRotation(Node<T> root) {
+        Node<T> newRoot = root.left;
+        root.left = newRoot.right;
+        newRoot.right = root;
+        //atualizar fator de balanceamento
+        root.bf = height(root.right) - height(root.left);
+        newRoot.bf = height(root.right) - height(root.left);
+        System.out.println("Rotação Direita --> ");
+        return newRoot;
+    }
 
+    public Node<T> leftRotation(Node<T> root) {
+        Node<T> newRoot = root.right;
+        root.right = newRoot.left;
+        newRoot.left = root;
+        //atualizar fator de balanceamento
+        root.bf = height(root.right) - height(root.left);
+        newRoot.bf = height(root.right) - height(root.left);
+        System.out.println("Rotação Esquerda --> ");
+        return newRoot;
+    }
 }
