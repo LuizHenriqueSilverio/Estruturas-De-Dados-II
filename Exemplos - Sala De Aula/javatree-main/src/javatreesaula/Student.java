@@ -2,16 +2,16 @@ package javatreesaula;
 
 import java.util.Objects;
 
-public class Aluno implements Comparable<Aluno>{
+public class Student implements Comparable<Student>{
     private int matricula;
     private String nome;
     
-    public Aluno(int matricula, String nome){
+    public Student(int matricula, String nome){
         this.matricula = matricula;
         this.nome = nome;
     }
     
-    public Aluno(){
+    public Student(){
 
     }
     
@@ -31,7 +31,7 @@ public class Aluno implements Comparable<Aluno>{
         this.nome = nome;
     }
     @Override
-    public int compareTo(Aluno outro){
+    public int compareTo(Student outro){
         return Integer.compare
            (this.matricula, outro.matricula);
     }
@@ -47,7 +47,7 @@ public class Aluno implements Comparable<Aluno>{
         if(novoObjeto == null || 
                 this.getClass()!= novoObjeto.getClass())
            return false; 
-        Aluno outroAluno = (Aluno) novoObjeto;
+        Student outroAluno = (Student) novoObjeto;
         return this.matricula == outroAluno.matricula;
     }
     

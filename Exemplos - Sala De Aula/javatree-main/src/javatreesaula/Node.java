@@ -2,13 +2,15 @@
 package javatreesaula;
 
 public class Node<T extends Comparable<T>>{
-    T dado;
-    Node<T> esquerda;
-    Node<T> direita;
+    T data;
+    Node<T> left;
+    Node<T> right;
+    int bf;
     
-    public Node(T novoDado){
-        this.dado = novoDado;
-        this.esquerda = null;
-        this.direita = null;
+    public Node(T newData){
+        this.data = newData;
+        this.left = null;
+        this.right = null;
+        this.bf = 0;
     }
 }

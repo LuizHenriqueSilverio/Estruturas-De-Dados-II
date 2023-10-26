@@ -4,7 +4,7 @@ import java.io.*;
 import javax.swing.JOptionPane;
 
 public class Formulario extends javax.swing.JFrame {
-    BinarySearchTree<Aluno> tree = new BinarySearchTree<>();
+    BinarySearchTree<Student> tree = new BinarySearchTree<>();
        
     public Formulario() {
         initComponents();
@@ -146,13 +146,13 @@ public class Formulario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void carregaArquivo(BinarySearchTree<Aluno> tree){
+    private void carregaArquivo(BinarySearchTree<Student> tree){
      String csvFile = "dados.csv";
         String line = "";
         String[] leitura = null;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                Aluno aluno = new Aluno();
+                Student aluno = new Student();
                 leitura = line.split(",");
                // System.out.println(leitura[0]+" " + leitura[1]);
                 aluno.setMatricula(Integer.parseInt(leitura[0]));
@@ -169,7 +169,7 @@ public class Formulario extends javax.swing.JFrame {
     
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-           Aluno al = new Aluno();
+           Student al = new Student();
            al.setMatricula(Integer.parseInt(txtCodigo.getText()));
            al.setNome(txtNome.getText());
            int retorno = tree.add(al);
@@ -185,7 +185,7 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadFileActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        Aluno alunodeBusca = new Aluno();
+        Student alunodeBusca = new Student();
         alunodeBusca.setMatricula
             (Integer.parseInt(txtCodigo.getText()));
         alunodeBusca = tree.buscar(alunodeBusca);
@@ -198,7 +198,7 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        tree.remove(new Aluno(Integer.parseInt(txtCodigo.getText()), txtNome.getText()));
+        tree.remove(new Student(Integer.parseInt(txtCodigo.getText()), txtNome.getText()));
         listMostraDados.append("\n Após remoção\n");
         tree.preOrder(listMostraDados);
     }//GEN-LAST:event_btnRemoverActionPerformed
