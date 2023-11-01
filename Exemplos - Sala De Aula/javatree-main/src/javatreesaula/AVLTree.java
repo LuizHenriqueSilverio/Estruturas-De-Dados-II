@@ -35,8 +35,8 @@ public class AVLTree<T extends Comparable<T>>{
                         root = leftRotation(root);
                     }
                     break;
-                case -1:
-                    if(root.right.bf <= 0) {
+                case -2:
+                    if(root.left.bf <= 0) {
                         root = rightRotation(root);
                     }else {
                         root.left = leftRotation(root.left);
@@ -122,16 +122,17 @@ public class AVLTree<T extends Comparable<T>>{
             return newRoot;
         }
         // percorrer até achar o menor da right
-        parent = root; newRoot = root.right;
+        parent = root; 
+        newRoot = root.right;
         while(newRoot.left!=null){
-		parent = newRoot;
-		newRoot = newRoot.left;
+            parent = newRoot;
+            newRoot = newRoot.left;
 	}// fim while
         
         // reorganizar os ponteiros
 	if(parent != root){
-		parent.left = newRoot.right;
-		newRoot.right = root.right;
+            parent.left = newRoot.right;
+            newRoot.right = root.right;
 	}
         
         newRoot.left = root.left;
@@ -145,17 +146,41 @@ public class AVLTree<T extends Comparable<T>>{
 
     public Node<T> remove(Node<T> root, T removeData) {
             if(root == null){
-                    System.out.println("Não encontrado - :(");
-                    return null;
+                System.out.println("Não encontrado - :(");
+                return null;
             }
+            
             if(root.data.equals(removeData)){
-                    System.out.println("Encontrado - removendo");
-                    return removeNode(root);
+                System.out.println("Encontrado - removendo");
+                return removeNode(root);
             }
-            if(removeData.compareTo(root.data) < 0)
-                    root.left = remove(root.left,removeData);
-            else
+            
+            if(removeData.compareTo(root.data) < 0){
+                root.left = remove(root.left,removeData);
+            }
+            else{
                 root.right = remove(root.right,removeData);
+            }
+            
+            root.bf = height(root.right) - height(root.left);
+            switch(root.bf) {
+                case 2:
+                    if(root.right.bf >= 0) {
+                        root = leftRotation(root);
+                    }else {
+                        root.right = rightRotation(root.right);
+                        root = leftRotation(root);
+                    }
+                    break;
+                case -2:
+                    if(root.left.bf <= 0) {
+                        root = rightRotation(root);
+                    }else {
+                        root.left = leftRotation(root.left);
+                        root = rightRotation(root);
+                    }
+                    break;
+            }
             return root;
     }// fim buscaRemove
 
