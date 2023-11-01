@@ -4,7 +4,7 @@ import java.io.*;
 import javax.swing.JOptionPane;
 
 public class Formulario extends javax.swing.JFrame {
-    BinarySearchTree<Student> tree = new BinarySearchTree<>();
+    AVLTree<Student> tree = new AVLTree<>();
        
     public Formulario() {
         initComponents();
@@ -48,7 +48,7 @@ public class Formulario extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -71,7 +71,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Binary Search Tree");
+        jLabel3.setText("AVL Tree");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,7 +146,7 @@ public class Formulario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void carregaArquivo(BinarySearchTree<Student> tree){
+    private void carregaArquivo(AVLTree<Student> tree){
      String csvFile = "dados.csv";
         String line = "";
         String[] leitura = null;
@@ -188,7 +188,7 @@ public class Formulario extends javax.swing.JFrame {
         Student alunodeBusca = new Student();
         alunodeBusca.setMatricula
             (Integer.parseInt(txtCodigo.getText()));
-        alunodeBusca = tree.buscar(alunodeBusca);
+        alunodeBusca = tree.search(alunodeBusca);
         if(alunodeBusca==null)
             JOptionPane.showMessageDialog
                   (rootPane, "Não encontrado :(");
