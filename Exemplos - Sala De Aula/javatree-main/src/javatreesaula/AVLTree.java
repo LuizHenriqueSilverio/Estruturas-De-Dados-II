@@ -19,11 +19,31 @@ public class AVLTree<T extends Comparable<T>>{
            if(root == null)
                 return newNode;
             
-            if(newNode.data.compareTo(root.data) >= 0)
+            if(newNode.data.compareTo(root.data) >= 0) {
                 root.right = insert(root.right, newNode);
-            else
+            }
+            else {
                 root.left = insert(root.left, newNode);
-            
+            }
+            root.bf = height(root.right) - height(root.left);
+            switch(root.bf) {
+                case 2:
+                    if(root.right.bf >= 0) {
+                        root = leftRotation(root);
+                    }else {
+                        root.right = rightRotation(root.right);
+                        root = leftRotation(root);
+                    }
+                    break;
+                case -1:
+                    if(root.right.bf <= 0) {
+                        root = rightRotation(root);
+                    }else {
+                        root.left = leftRotation(root.left);
+                        root = rightRotation(root);
+                    }
+                    break;
+            }
             return root; // retorna a root atualizada
     }
     
@@ -163,7 +183,7 @@ public class AVLTree<T extends Comparable<T>>{
         newRoot.right = root;
         //atualizar fator de balanceamento
         root.bf = height(root.right) - height(root.left);
-        newRoot.bf = height(root.right) - height(root.left);
+        newRoot.bf = height(newRoot.right) - height(newRoot .left);
         System.out.println("Rotação Direita --> ");
         return newRoot;
     }
@@ -174,7 +194,7 @@ public class AVLTree<T extends Comparable<T>>{
         newRoot.left = root;
         //atualizar fator de balanceamento
         root.bf = height(root.right) - height(root.left);
-        newRoot.bf = height(root.right) - height(root.left);
+        newRoot.bf = height(newRoot.right) - height(newRoot.left);
         System.out.println("Rotação Esquerda --> ");
         return newRoot;
     }
