@@ -62,14 +62,15 @@ public class BinarySearchTree<T extends Comparable<T>> {
     
     
     public String getStudentDataPreOrder() {
-        StringBuilder studentData = new StringBuilder();
+        String studentData = "";
         getStudentDataPreOrder(root, studentData);
-        return studentData.toString();
+        return studentData;
     }
     
-    public void getStudentDataPreOrder(Node<T> root, StringBuilder studentData) {
+    public void getStudentDataPreOrder(Node<T> root, String studentData) {
         if(root != null) {
-            studentData.append(root.data.toString() + "\n");
+            //studentData.append(root.data.toString() + "\n");
+            studentData += root.data.toString() + "\n";
             getStudentDataPreOrder(root.left, studentData);
             getStudentDataPreOrder(root.right, studentData);
         }
