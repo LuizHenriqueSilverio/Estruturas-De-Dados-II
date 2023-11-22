@@ -9,31 +9,54 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Graph {
-     private Map<Integer, LinkedList<Edge>> listaAdjacencia;
+     private Map<Integer, LinkedList<Edge>> myGraph;
 
     public Graph() {
-        this.listaAdjacencia = new HashMap<>();
+        this.myGraph = new HashMap<>();
     }
 
     // Método para adicionar um vértice ao grafo
     public void adicionarVertice(int vertice) {
-        if (!listaAdjacencia.containsKey(vertice)) {
-            listaAdjacencia.put(vertice, new LinkedList<>());
+        if (!myGraph.containsKey(vertice)) {
+            myGraph.put(vertice, new LinkedList<>());
         }
     }
     public void adicionarAresta(int origem, int destino, int peso) {
-        if (!listaAdjacencia.containsKey(origem) || !listaAdjacencia.containsKey(destino)) {
+        if (!myGraph.containsKey(origem) || !myGraph.containsKey(destino)) {
             throw new IllegalArgumentException("Os vértices de origem e destino devem existir no grafo.");
         }
 
-        listaAdjacencia.get(origem).add(new Edge(destino, peso));
+        myGraph.get(origem).add(new Edge(destino, peso));
         //listaAdjacencia.get(destino).add(new Edge(origem, weight));
 
     }
     
+    public boolean reach(int origin, int destination) {
+        Set<Integer> visited = new HashSet<>();        
+        return pathExists(origin, destination, visited);
+    }
+    
+    private boolean pathExists(int currentVertex, int destination, Set<Integer> visited) {
+        if(currentVertex == destination) {
+            System.out.println("Conexoes: " + visited);
+            return true;
+        }
+        visited.add(currentVertex);
+        LinkedList<Edge> adjacencies = myGraph.get(currentVertex);
+        if(adjacencies != null) {
+            for(Edge adjacent : adjacencies) {
+                if(!visited.contains(adjacent.vertex) && pathExists(currentVertex, destination, visited)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
   
     public void imprimirGrafo() {
-        for (Map.Entry<Integer, LinkedList<Edge>> entry : listaAdjacencia.entrySet()) {
+        for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {
             int vertice = entry.getKey();
             LinkedList<Edge> vizinhos = entry.getValue();
             System.out.print(vertice + " -> ");
@@ -46,7 +69,7 @@ public class Graph {
     
      public void salvarGrafo() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("grafo.txt"))) {
-            for (Map.Entry<Integer, LinkedList<Edge>> entry : listaAdjacencia.entrySet()) {
+            for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {
                 int vertice = entry.getKey();
                 LinkedList<Edge> vizinhos = entry.getValue();
                 for (Edge vizinho : vizinhos) {
