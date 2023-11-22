@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Graph {
-     private Map<Integer, LinkedList<Aresta>> listaAdjacencia;
+     private Map<Integer, LinkedList<Edge>> listaAdjacencia;
 
     public Graph() {
         this.listaAdjacencia = new HashMap<>();
@@ -26,19 +26,19 @@ public class Graph {
             throw new IllegalArgumentException("Os vértices de origem e destino devem existir no grafo.");
         }
 
-        listaAdjacencia.get(origem).add(new Aresta(destino, peso));
-        //listaAdjacencia.get(destino).add(new Aresta(origem, peso));
+        listaAdjacencia.get(origem).add(new Edge(destino, peso));
+        //listaAdjacencia.get(destino).add(new Edge(origem, weight));
 
     }
     
   
     public void imprimirGrafo() {
-        for (Map.Entry<Integer, LinkedList<Aresta>> entry : listaAdjacencia.entrySet()) {
+        for (Map.Entry<Integer, LinkedList<Edge>> entry : listaAdjacencia.entrySet()) {
             int vertice = entry.getKey();
-            LinkedList<Aresta> vizinhos = entry.getValue();
+            LinkedList<Edge> vizinhos = entry.getValue();
             System.out.print(vertice + " -> ");
-            for (Aresta vizinho : vizinhos) {
-                System.out.print(vizinho.vertice+"["+vizinho.peso+"]" + " ");
+            for (Edge vizinho : vizinhos) {
+                System.out.print(vizinho.vertex+"["+vizinho.weight+"]" + " ");
             }
             System.out.println();
         }
@@ -46,11 +46,11 @@ public class Graph {
     
      public void salvarGrafo() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("grafo.txt"))) {
-            for (Map.Entry<Integer, LinkedList<Aresta>> entry : listaAdjacencia.entrySet()) {
+            for (Map.Entry<Integer, LinkedList<Edge>> entry : listaAdjacencia.entrySet()) {
                 int vertice = entry.getKey();
-                LinkedList<Aresta> vizinhos = entry.getValue();
-                for (Aresta vizinho : vizinhos) {
-                    writer.println(vertice + " " + vizinho.vertice + " " + vizinho.peso);
+                LinkedList<Edge> vizinhos = entry.getValue();
+                for (Edge vizinho : vizinhos) {
+                    writer.println(vertice + " " + vizinho.vertex + " " + vizinho.weight);
                 }
             }
         } catch (IOException e) {

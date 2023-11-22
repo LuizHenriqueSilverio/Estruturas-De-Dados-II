@@ -4,13 +4,13 @@
  */
 package grafos;
 
-public class Aresta {
-        int vertice;
-        int peso;
+public class Edge {
+        int vertex;
+        int weight;
 
-        public Aresta(int destino, int peso) {
-            this.vertice = destino;
-            this.peso = peso;
+        public Edge(int destino, int peso) {
+            this.vertex = destino;
+            this.weight = peso;
         }
     
 }
