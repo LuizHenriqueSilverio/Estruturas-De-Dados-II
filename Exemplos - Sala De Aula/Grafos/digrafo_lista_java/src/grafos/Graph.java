@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Graph {
      private Map<Integer, LinkedList<Edge>> myGraph;
+     private ArrayList visited;
 
     public Graph() {
         this.myGraph = new HashMap<>();
@@ -54,6 +55,22 @@ public class Graph {
         return false;
     }
     
+    public ArrayList depthSearch(int origin) {
+        visited = new ArrayList();
+        exploreDFS(origin);
+        return visited;
+    }
+    
+    private void exploreDFS(int currentVertex) {
+        visited.add(currentVertex);
+        LinkedList<Edge> adjacents = myGraph.get(currentVertex);
+        for(Edge adj : adjacents) {
+            if(!visited.contains(adj.vertex)) {
+                exploreDFS(adj.vertex);
+            }
+        }
+    }
+    
   
     public void imprimirGrafo() {
         for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {
@@ -83,7 +100,7 @@ public class Graph {
 
     // Método para carregar os dados do grafo de um arquivo texto
     public void carregarGrafo() {
-        try (Scanner scanner = new Scanner(new File("grafo.txt"))) {
+        try (Scanner scanner = new Scanner(new File("grafo2.txt"))) {
             while (scanner.hasNext()) {
                 int origem = scanner.nextInt();
                 int destino = scanner.nextInt();
