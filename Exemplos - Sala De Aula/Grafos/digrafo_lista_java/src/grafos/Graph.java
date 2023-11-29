@@ -71,6 +71,19 @@ public class Graph {
         }
     }
     
+    public List breadthSearch(int startingVertex) {
+        Queue<Integer> queue = new LinkedList<>();
+        visited = new ArrayList<>();
+        queue.add(startingVertex);
+        
+        while(!queue.isEmpty()) {
+            int currentVertex = queue.poll(); //dequeue
+            visited.add(currentVertex);
+            List<Edge> neighbors = myGraph.get(currentVertex);
+        }
+        
+        return null;
+    }
   
     public void imprimirGrafo() {
         for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {
