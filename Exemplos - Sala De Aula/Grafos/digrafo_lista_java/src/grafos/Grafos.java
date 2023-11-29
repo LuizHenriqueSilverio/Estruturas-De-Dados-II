@@ -64,6 +64,11 @@ public class Grafos {
                 origem = scanner.nextInt();
                 System.out.println(grafo.depthSearch(origem));
                 break;
+            case 6:
+                System.out.println("BFS");
+                System.out.println("Origem: ");
+                origem = scanner.nextInt();
+                System.out.println(grafo.breadthSearch(origem));
             case 0: System.out.println("Saindo");
                     grafo.salvarGrafo();
             break;

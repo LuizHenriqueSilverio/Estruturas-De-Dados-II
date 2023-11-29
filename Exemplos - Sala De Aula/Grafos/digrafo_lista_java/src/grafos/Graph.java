@@ -80,9 +80,14 @@ public class Graph {
             int currentVertex = queue.poll(); //dequeue
             visited.add(currentVertex);
             List<Edge> neighbors = myGraph.get(currentVertex);
+            
+            for(Edge adjacent : neighbors) {
+                if(!visited.contains(adjacent.vertex) && !queue.contains(adjacent.vertex)) {
+                    queue.add(adjacent.vertex);
+                }
+            }
         }
-        
-        return null;
+        return visited;
     }
   
     public void imprimirGrafo() {
