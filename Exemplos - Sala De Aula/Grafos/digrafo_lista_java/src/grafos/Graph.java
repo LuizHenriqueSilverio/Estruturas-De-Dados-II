@@ -124,15 +124,18 @@ public class Graph {
                     int newDistance = distances.get(currentVertex) + edgeWeight;
                     
                     if(newDistance < distances.get(neighbor)) {
-                        
+                        distances.put(neighbor, newDistance);
+                        predecessors.put(neighbor, currentVertex);
+                        priorityQueue.add(new Node(neighbor, newDistance));
                     }
+                }
             }
         }
         
-        return null;
+        return distances;
     }
   
-    public void imprimirGrafo() {
+    public void imprimirGrafo(){
         for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {
             int vertice = entry.getKey();
             LinkedList<Edge> vizinhos = entry.getValue();
@@ -160,7 +163,7 @@ public class Graph {
 
     // Método para carregar os dados do grafo de um arquivo texto
     public void carregarGrafo() {
-        try (Scanner scanner = new Scanner(new File("grafo2.txt"))) {
+        try (Scanner scanner = new Scanner(new File("grafo3.txt"))) {
             while (scanner.hasNext()) {
                 int origem = scanner.nextInt();
                 int destino = scanner.nextInt();

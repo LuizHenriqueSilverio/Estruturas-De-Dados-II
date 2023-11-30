@@ -4,6 +4,7 @@
 package grafos;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -18,6 +19,7 @@ public class Main {
         System.out.println("4-Alcance Grafo");
         System.out.println("5-Busca em Profundidade [DFS]");
         System.out.println("6-Busca em Largura [BFS]");
+        System.out.println("7-Menor disancia [Dijkstra]");
         System.out.println("0-Sair");
         op = scanner.nextInt();
         return op;
@@ -69,6 +71,17 @@ public class Main {
                 System.out.println("Origem: ");
                 origem = scanner.nextInt();
                 System.out.println(grafo.breadthSearch(origem));
+                break;
+            case 7:
+                System.out.println("Dijkstra");
+                System.out.println("Origem: ");
+                origem = scanner.nextInt();
+                Map<Integer, Integer> distancias = grafo.dijkstra(origem);
+                for (int vertice : distancias.keySet()) {
+                    int distancia = distancias.get(vertice);
+                    System.out.println("Distância mínima de " + origem + " para " + vertice + ": " + distancia);
+                }
+                break;
             case 0: System.out.println("Saindo");
                     grafo.salvarGrafo();
             break;
