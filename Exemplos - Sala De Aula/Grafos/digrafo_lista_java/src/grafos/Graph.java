@@ -96,7 +96,41 @@ public class Graph {
         return visited;
     }
     
-    
+    public Map<Integer, Integer> dijkstra(int origin) {
+        Map<Integer, Integer> distances = new HashMap<>();
+        Map<Integer, Integer> predecessors = new HashMap<>();
+        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(new DistanceComparator());
+        visited = new ArrayList();
+        
+        for (int vertex : myGraph.keySet()) {
+            distances.put(vertex, Integer.MAX_VALUE);
+            predecessors.put(vertex, null);
+        }
+
+        distances.put(origin, 0);
+        priorityQueue.add(new Node(origin, 0));
+        
+        //processar o grafo
+        
+        while(!priorityQueue.isEmpty()) {
+            int currentVertex = priorityQueue.poll().vertex;
+            
+            if(!visited.contains(currentVertex)) {
+                visited.add(currentVertex);
+                
+                for (Edge edge : myGraph.get(currentVertex)) {
+                    int neighbor = edge.vertex;
+                    int edgeWeight = edge.weight;
+                    int newDistance = distances.get(currentVertex) + edgeWeight;
+                    
+                    if(newDistance < distances.get(neighbor)) {
+                        
+                    }
+            }
+        }
+        
+        return null;
+    }
   
     public void imprimirGrafo() {
         for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {
