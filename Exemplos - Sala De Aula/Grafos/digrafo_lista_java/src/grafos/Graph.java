@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+class DistanceComparator implements Comparator<Node> {
+    public int compare(Node n1, Node n2) {
+        return Integer.compare(n1.distance, n2.distance);
+    }
+}
+
 public class Graph {
      private Map<Integer, LinkedList<Edge>> myGraph;
      private ArrayList visited;
@@ -89,6 +95,8 @@ public class Graph {
         }
         return visited;
     }
+    
+    
   
     public void imprimirGrafo() {
         for (Map.Entry<Integer, LinkedList<Edge>> entry : myGraph.entrySet()) {

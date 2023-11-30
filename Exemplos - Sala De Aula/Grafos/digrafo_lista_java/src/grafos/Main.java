@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Grafos {
+public class Main {
 
      static int menuMetodos(){
         Scanner scanner = new Scanner(System.in);
